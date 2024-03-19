@@ -1,0 +1,18 @@
+include<stdio.h>
+#include<stdlib.h>
+#define MAX_LENGTH 100
+int encrypt_decrypt(char *message, int key, int mode) {
+for(; *message; message++) {
+char ch = *message;
+if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) { char base = (ch >= 'a') ? 'a' : 'A';
+*message = base + (ch - base + (mode * key)) % 26; }
+}
+}
+int main() { char message[MAX_LENGTH];
+int key;
+printf("Enter a message: "); fgets(message, sizeof(message), stdin); // Input the key
+printf("Enter key: "); scanf("%d", &key); // Encrypt the message
+encrypt_decrypt(message, key, 1); printf("Encrypted message: %s\n", message); // Decrypt the message
+encrypt_decrypt(message, key, -1); printf("Decrypted message: %s\n", message);
+return 0;
+}
